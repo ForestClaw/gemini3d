@@ -40,4 +40,4 @@ target_link_libraries(ionization PRIVATE const neutral grid meshobj timeutils fa
 
 add_library(precipBCs OBJECT boundary_conditions/precipBCs_mod.f90)
 target_compile_options(precipBCs PRIVATE ${gfortran_opts})
-target_link_libraries(precipBCs PRIVATE mpimod reader const grid meshobj interp timeutils config MPI::MPI_Fortran )
+target_link_libraries(precipBCs PRIVATE mpimod reader const grid meshobj interp timeutils config inputdata precipdata MPI::MPI_Fortran )
