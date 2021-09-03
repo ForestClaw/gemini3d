@@ -12,7 +12,8 @@
 ! See the License for the specific language governing permissions and
 ! limitations under the License.
 
-Program Gemini3D
+!! Program Gemini3D
+subroutine gemini3d_sub()
 !! MAIN PROGRAM FOR GEMINI3D
 use, intrinsic :: iso_fortran_env, only : stderr=>error_unit
 
@@ -145,15 +146,36 @@ end if
 
 
 !> ALLOCATE ARRAYS (AT THIS POINT ALL SIZES ARE SET FOR EACH PROCESS SUBGRID)
-allocate(ns(-1:lx1+2,-1:lx2+2,-1:lx3+2,lsp),vs1(-1:lx1+2,-1:lx2+2,-1:lx3+2,lsp),vs2(-1:lx1+2,-1:lx2+2,-1:lx3+2,lsp), &
-  vs3(-1:lx1+2,-1:lx2+2,-1:lx3+2,lsp), Ts(-1:lx1+2,-1:lx2+2,-1:lx3+2,lsp))
-allocate(rhov2(-1:lx1+2,-1:lx2+2,-1:lx3+2),rhov3(-1:lx1+2,-1:lx2+2,-1:lx3+2),B1(-1:lx1+2,-1:lx2+2,-1:lx3+2), &
-         B2(-1:lx1+2,-1:lx2+2,-1:lx3+2),B3(-1:lx1+2,-1:lx2+2,-1:lx3+2))
-allocate(v1(-1:lx1+2,-1:lx2+2,-1:lx3+2),v2(-1:lx1+2,-1:lx2+2,-1:lx3+2), &
-         v3(-1:lx1+2,-1:lx2+2,-1:lx3+2),rhom(-1:lx1+2,-1:lx2+2,-1:lx3+2))
-allocate(E1(lx1,lx2,lx3),E2(lx1,lx2,lx3),E3(lx1,lx2,lx3),J1(lx1,lx2,lx3),J2(lx1,lx2,lx3),J3(lx1,lx2,lx3))
+allocate(ns(-1:lx1+2,-1:lx2+2,-1:lx3+2,lsp), & 
+        vs1(-1:lx1+2,-1:lx2+2,-1:lx3+2,lsp), & 
+        vs2(-1:lx1+2,-1:lx2+2,-1:lx3+2,lsp), &
+        vs3(-1:lx1+2,-1:lx2+2,-1:lx3+2,lsp), & 
+         Ts(-1:lx1+2,-1:lx2+2,-1:lx3+2,lsp))
+
+allocate(rhov2(-1:lx1+2,-1:lx2+2,-1:lx3+2), & 
+         rhov3(-1:lx1+2,-1:lx2+2,-1:lx3+2), & 
+            B1(-1:lx1+2,-1:lx2+2,-1:lx3+2), &
+            B2(-1:lx1+2,-1:lx2+2,-1:lx3+2), & 
+            B3(-1:lx1+2,-1:lx2+2,-1:lx3+2))
+allocate(v1(-1:lx1+2,-1:lx2+2,-1:lx3+2), & 
+         v2(-1:lx1+2,-1:lx2+2,-1:lx3+2), &
+         v3(-1:lx1+2,-1:lx2+2,-1:lx3+2), & 
+       rhom(-1:lx1+2,-1:lx2+2,-1:lx3+2))
+
+allocate(E1(lx1,lx2,lx3), & 
+         E2(lx1,lx2,lx3), & 
+         E3(lx1,lx2,lx3), & 
+         J1(lx1,lx2,lx3), & 
+         J2(lx1,lx2,lx3), & 
+         J3(lx1,lx2,lx3))
+
 allocate(Phi(lx1,lx2,lx3))
-allocate(nn(lx1,lx2,lx3,lnchem),Tn(lx1,lx2,lx3),vn1(lx1,lx2,lx3), vn2(lx1,lx2,lx3),vn3(lx1,lx2,lx3))
+
+allocate(nn(lx1,lx2,lx3,lnchem), & 
+         Tn(lx1,lx2,lx3), & 
+         vn1(lx1,lx2,lx3), & 
+         vn2(lx1,lx2,lx3), & 
+         vn3(lx1,lx2,lx3))
 
 
 !> ALLOCATE MEMORY FOR ROOT TO STORE CERTAIN VARS. OVER ENTIRE GRID
@@ -470,4 +492,5 @@ block
   print '(/,A,I0,A,I0,A)', 'GEMINI normal termination, Process # ', mpi_cfg%myid,' / ',mpi_cfg%lid-1, ' at ' // date // 'T' // time
 end block
 
-end program
+!!end program
+end subroutine gemini3d_sub
